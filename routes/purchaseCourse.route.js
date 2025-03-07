@@ -1,13 +1,15 @@
-import express from "express";
-import isAuthenticated from "../middlewares/isAuthenticated.js";
-import { createCheckoutSession, getAllPurchasedCourse, getCourseDetailWithPurchaseStatus, stripeWebhook } from "../controllers/coursePurchase.controller.js";
+import express from 'express';
+import { createCheckoutSession,getAllPurchasedCourse, chapaWebhook, getCourseDetailWithPurchaseStatus } from '../controllers/coursePurchase.controller.js'; // Adjust the path as needed
 
 const router = express.Router();
 
-router.route("/checkout/create-checkout-session").post(isAuthenticated, createCheckoutSession);
-router.route("/webhook").post(express.raw({type:"application/json"}), stripeWebhook);
-router.route("/course/:courseId/detail-with-status").get(isAuthenticated,getCourseDetailWithPurchaseStatus);
+// Route to create a new checkout session
+router.post('/create-checkout-session', createCheckoutSession);
 
-router.route("/").get(isAuthenticated,getAllPurchasedCourse);
+// Route to handle Chapa webhook callback
+router.post('/callback', chapaWebhook);
+router.get("/", getAllPurchasedCourse);
+// Route to get course details with purchase status
+router.get('/course/:courseId/detail-with-status', getCourseDetailWithPurchaseStatus);
 
 export default router;
