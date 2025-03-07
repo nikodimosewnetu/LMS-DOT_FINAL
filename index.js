@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(cors({
-    origin:"http://localhost:5173",
+    origin:"https://lms-front-lovat.vercel.app/",
     credentials:true
 }));
  
@@ -59,7 +59,7 @@ app.post("/accept-payment", async (req, res) => {
       last_name,
       phone_number,
       tx_ref,
-      return_url: `http://localhost:5173/payment-success?tx_ref=${tx_ref}`, // Ensure frontend is using this URL
+      return_url: `https://lms-front-lovat.vercel.app/payment-success?tx_ref=${tx_ref}`, // Ensure frontend is using this URL
     };
 
     const response = await axios.post(

@@ -36,8 +36,8 @@ export const createCheckoutSession = async (req, res) => {
         userId: userId,
       },
       callback_url: `${process.env.BASE_URL}/api/payment/callback`, // Your webhook/callback URL for Chapa
-      success_url: `http://localhost:5173/course-progress/${courseId}`,
-      cancel_url: `http://localhost:5173/course-detail/${courseId}`,
+      success_url: `https://lms-front-lovat.vercel.app/course-progress/${courseId}`,
+      cancel_url: `https://lms-front-lovat.vercel.app/course-detail/${courseId}`,
     });
 
     if (!paymentLink || !paymentLink.link) {
